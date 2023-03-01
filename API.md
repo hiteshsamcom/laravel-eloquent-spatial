@@ -453,48 +453,38 @@ Place::query()
 ```
 </details>
 
-## Available Geometry Helpers
+## Available Geometry Functions
 
-
-###  distanceSphere
-
-Compute the spherical distance between two points using the [ST_Distance_Sphere](https://dev.mysql.com/doc/refman/5.7/en/spatial-convenience-functions.html#function_st-distance-sphere) function.
-
-| parameter name | type             |
-|----------------|------------------|
-| `$point1`      | `Point \ string` |
-| `$point2`      | `Point \ string` |
-
-<details><summary>Example</summary>
+Geometry functions are available in the `GeometryFunctions` class.
+The logic is processed on the database side.
 
 ```php
-  $point1 = new Point(41.9631174, -87.6770458);
-  $point2 = new Point(40.7628267, -73.9898293);
+use MatanYadaev\EloquentSpatial\GeometryFunctions;
 
-  $distance = GeometryUtilities::make()
-    ->distanceSphere($point1, $point2); // 1148798.720296128 (meters)
+// Choose a connection
+$geometryFunctions = GeometryFunctions::make(connection: 'mysql');
+// Or use the default connection
+$geometryFunctions = GeometryFunctions::make();
+
+// Use the functions
+$geometryFunctions->convexHull(...);
 ```
-</details>
-
 
 ###  convexHull
 
-Creates a ConvexHull using the specified geometry using the [ST_ConvexHull](https://dev.mysql.com/doc/refman/8.0/en/spatial-operator-functions.html#function_st-convexhull) function.
+Creates a Convex Hull using the [ST_ConvexHull](https://dev.mysql.com/doc/refman/8.0/en/spatial-operator-functions.html#function_st-convexhull) function.
 
-| parameter name | type                |
-|----------------|---------------------|
-| `$geometry`    | `Geometry \ string` |
+| parameter name | type         |
+|----------------|--------------|
+| `$multiPoint`  | `MultiPoint` |
 
 <details><summary>Example</summary>
 
 ```php
-$points = MultiPoint::fromJson('{"type":"MultiPoint","coordinates":[[-1,-1],[1,-1],[1,1],[-1,1],[-1,-1],[0,0]]}');
+$multiPoint = MultiPoint::fromJson('{"type":"MultiPoint","coordinates":[[-1,-1],[1,-1],[1,1],[-1,1],[-1,-1],[0,0]]}');
 
-$wkbHull = SpatialQuery::make()
-  ->convexHull($points)
-  ->first()
-  ->convex_hull;
-  
-Polygon::fromWkb($wkbHull) // {"type":"Polygon","coordinates":[[[-1,-1],[1,-1],[1,1],[-1,1],[-1,-1]]]}
+$convexHullPolygon = GeometryFunctions::make()->convexHull($multiPoint);
+
+echo $convexHullPolygon->toJson(); // {"type":"Polygon","coordinates":[[[-1,-1],[1,-1],[1,1],[-1,1],[-1,-1]]]}
 ```
 </details>

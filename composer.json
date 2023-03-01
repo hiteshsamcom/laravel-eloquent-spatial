@@ -28,7 +28,10 @@
   "autoload": {
     "psr-4": {
       "MatanYadaev\\EloquentSpatial\\": "src"
-    }
+    },
+    "files": [
+      "src/toExpressionString.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
