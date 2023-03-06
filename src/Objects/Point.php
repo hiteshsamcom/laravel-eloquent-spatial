@@ -21,9 +21,9 @@ class Point extends Geometry
 
     $pointClass = Factory::getPointClass();
     if ($pointClass !== self::class) {
-      # @TODO test this
-      # @TODO find a better exception class
-      # @TODO write for other objects
+      // @TODO test this
+      // @TODO find a better exception class
+      // @TODO write for other objects
       throw new RuntimeException("Point class must be {$pointClass}.");
     }
   }

@@ -35,7 +35,7 @@ class EloquentSpatialServiceProvider extends DatabaseServiceProvider
 
   protected function registerDoctrineTypes(Connection $connection): void
   {
-    # @TODO assert this
+    // @TODO assert this
     /** @var array<string, class-string<Type>> $doctrineTypes */
     $doctrineTypes = config()->get('eloquent-spatial.doctrine_types');
 

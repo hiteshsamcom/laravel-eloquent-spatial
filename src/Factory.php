@@ -101,12 +101,12 @@ class Factory
    */
   public static function getPointClass(): string
   {
-    $pointClass = app('config')->get('eloquent-spatial.geometries.point');
+    $pointClass = config()->get('eloquent-spatial.geometries.point');
 
     if (! class_exists($pointClass) or ! is_a($pointClass, Point::class, allow_string: true)) {
-      # @TODO change exception type and message
-      # @TODO add test (use dataset)
-      # @TODO find a better place to store these methods
+      // @TODO change exception type and message
+      // @TODO add test (use dataset)
+      // @TODO find a better place to store these methods
       throw new InvalidArgumentException('Invalid point class.');
     }
 
@@ -120,7 +120,7 @@ class Factory
    */
   public static function getLineStringClass(): string
   {
-    $lineStringClass = app('config')->get('eloquent-spatial.geometries.line_string');
+    $lineStringClass = config()->get('eloquent-spatial.geometries.line_string');
 
     if (! class_exists($lineStringClass) or ! is_a($lineStringClass, LineString::class, allow_string: true)) {
       throw new InvalidArgumentException('Invalid line string class.');
@@ -136,7 +136,7 @@ class Factory
    */
   public static function getPolygonClass(): string
   {
-    $polygonClass = app('config')->get('eloquent-spatial.geometries.polygon');
+    $polygonClass = config()->get('eloquent-spatial.geometries.polygon');
 
     if (! class_exists($polygonClass) or ! is_a($polygonClass, Polygon::class, allow_string: true)) {
       throw new InvalidArgumentException('Invalid polygon class.');
@@ -152,7 +152,7 @@ class Factory
    */
   public static function getMultiPointClass(): string
   {
-    $multiPointClass = app('config')->get('eloquent-spatial.geometries.multi_point');
+    $multiPointClass = config()->get('eloquent-spatial.geometries.multi_point');
 
     if (! class_exists($multiPointClass) or ! is_a($multiPointClass, MultiPoint::class, allow_string: true)) {
       throw new InvalidArgumentException('Invalid multi point class.');
@@ -168,7 +168,7 @@ class Factory
    */
   public static function getMultiLineStringClass(): string
   {
-    $multiLineStringClass = app('config')->get('eloquent-spatial.geometries.multi_line_string');
+    $multiLineStringClass = config()->get('eloquent-spatial.geometries.multi_line_string');
 
     if (! class_exists($multiLineStringClass) or ! is_a($multiLineStringClass, MultiLineString::class, allow_string: true)) {
       throw new InvalidArgumentException('Invalid multi line string class.');
@@ -184,7 +184,7 @@ class Factory
    */
   public static function getMultiPolygonClass(): string
   {
-    $multiPolygonClass = app('config')->get('eloquent-spatial.geometries.multi_polygon');
+    $multiPolygonClass = config()->get('eloquent-spatial.geometries.multi_polygon');
 
     if (! class_exists($multiPolygonClass) or ! is_a($multiPolygonClass, MultiPolygon::class, allow_string: true)) {
       throw new InvalidArgumentException('Invalid multi polygon class.');
@@ -200,7 +200,7 @@ class Factory
    */
   public static function getGeometryCollectionClass(): string
   {
-    $geometryCollectionClass = app('config')->get('eloquent-spatial.geometries.geometry_collection');
+    $geometryCollectionClass = config()->get('eloquent-spatial.geometries.geometry_collection');
 
     if (! class_exists($geometryCollectionClass) or ! is_a($geometryCollectionClass, GeometryCollection::class, allow_string: true)) {
       throw new InvalidArgumentException('Invalid geometry collection class.');
