@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace MatanYadaev\EloquentSpatial\Objects;
 
+use MatanYadaev\EloquentSpatial\Factory;
+use RuntimeException;
+
 class Point extends Geometry
 {
   public float $latitude;
@@ -15,6 +18,14 @@ class Point extends Geometry
     $this->latitude = $latitude;
     $this->longitude = $longitude;
     $this->srid = $srid;
+
+    $pointClass = Factory::getPointClass();
+    if ($pointClass !== self::class) {
+      # @TODO test this
+      # @TODO find a better exception class
+      # @TODO write for other objects
+      throw new RuntimeException("Point class must be {$pointClass}.");
+    }
   }
 
   public function toWkt(): string

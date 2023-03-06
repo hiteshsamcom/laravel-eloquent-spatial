@@ -42,3 +42,5 @@ it('uses custom Doctrine types for spatial columns', function (): void {
     ->toBeInstanceOf(GeometryCollectionType::class)
     ->getName()->toBe('geometrycollection');
 });
+
+# @TODO add tests for custom types
